@@ -7,8 +7,9 @@ import java.sql.Statement;
 
 
 public class AddressbookSystem {
-    //Retrieve data from addressbook system.
-    public  void retrieveData() {
+    //updata contact from addressbook system.
+    public  void updataContacts() {
+
         try {
             //1.Load a driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -21,14 +22,16 @@ public class AddressbookSystem {
                 System.out.println("Connection is created");
             }
 
-            //3.Write a Query
-            String query = "select * from address_book;";
+            String query = "update address_book set city = 'Mumbai' where FirstName = 'Abhishek'";
 
             //4.prepare a statement
             Statement statement = connection.createStatement();
-            ResultSet set = statement.executeQuery(query);
+            statement.execute(query);
+            ResultSet set =  statement.executeQuery("select * from address_book");
 
-            while (set.next()) {   // Retrieve all data from address_book table.
+            System.out.println("...Inserted.");;
+
+            while (set.next()) {   // Retrieve all data from employee_payroll table.
                 System.out.println("FirstName : " + set.getString(1));
                 System.out.println("LastName : " + set.getString(2));
                 System.out.println("Address : " + set.getString(3));
@@ -48,6 +51,6 @@ public class AddressbookSystem {
     }
     public static void main(String[] args) {
         AddressbookSystem object = new AddressbookSystem();
-        object.retrieveData();
+        object.updataContacts();
     }
 }
